@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Badar Ghalib — Senior BI Developer & Data Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════════════════════ */
+:root{
+  --bg:       #0e0f13;
+  --bg2:      #13141a;
+  --bg3:      #1a1c25;
+  --surface:  #1e2030;
+  --border:   rgba(255,255,255,.07);
+  --gold:     #e8b84b;
+  --gold2:    #f5d080;
+  --amber:    #d4830a;
+  --teal:     #38c9b0;
+  --rose:     #f0607a;
+  --fg:       #ecedf2;
+  --fg2:      #a8abbe;
+  --fg3:      #6b6f85;
+  --radius:   14px;
+  --ease:     cubic-bezier(.25,.8,.25,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{
+  background:var(--bg);
+  color:var(--fg);
+  font-family:'Outfit',sans-serif;
+  font-weight:400;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+::selection{background:var(--gold);color:#000;}
+
+/* noise texture overlay */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:.4;
+}
+
+/* ═══════════════════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;
+  z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 48px;
+  background:rgba(14,15,19,.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  transition:padding .3s var(--ease);
+}
+nav.scrolled{padding:12px 48px;}
+.nav-logo{
+  font-family:'Playfair Display',serif;
+  font-size:18px;font-weight:700;
+  color:var(--fg);letter-spacing:.02em;
+}
+.nav-logo span{color:var(--gold);}
+.nav-links{display:flex;gap:32px;}
+.nav-links a{
+  font-size:12.5px;font-weight:500;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--fg2);
+  text-decoration:none;transition:color .2s;
+}
+.nav-links a:hover{color:var(--gold);}
+.nav-cta{
+  background:var(--gold);color:#000;
+  font-size:12px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;padding:9px 20px;
+  border-radius:6px;text-decoration:none;
+  transition:background .2s,transform .15s;
+}
+.nav-cta:hover{background:var(--gold2);transform:translateY(-1px);}
+
+/* ═══════════════════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════════════════ */
+.hero{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  padding:120px 48px 80px;
+  position:relative;
+  overflow:hidden;
+}
+.hero-bg-glow{
+  position:absolute;
+  top:-100px;right:-100px;
+  width:600px;height:600px;
+  background:radial-gradient(circle,rgba(232,184,75,.12) 0%,transparent 65%);
+  pointer-events:none;
+}
+.hero-bg-glow2{
+  position:absolute;
+  bottom:-80px;left:20%;
+  width:400px;height:400px;
+  background:radial-gradient(circle,rgba(56,201,176,.07) 0%,transparent 65%);
+  pointer-events:none;
+}
+/* animated grid lines */
+.hero::after{
+  content:'';
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:60px 60px;
+  pointer-events:none;mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,black,transparent);
+}
+.hero-left{position:relative;z-index:1;padding-right:40px;}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:11px;font-weight:600;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--gold);
+  margin-bottom:24px;
+}
+.hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--gold);}
+.hero-name{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(42px,5.5vw,72px);
+  font-weight:900;line-height:1.0;
+  color:var(--fg);margin-bottom:6px;
+}
+.hero-name em{
+  font-style:italic;color:var(--gold);
+  display:block;
+}
+.hero-title{
+  font-size:clamp(14px,1.8vw,18px);
+  font-weight:300;color:var(--fg2);
+  margin-bottom:28px;letter-spacing:.02em;
+}
+.hero-title strong{color:var(--teal);font-weight:600;}
+.hero-desc{
+  font-size:15px;color:var(--fg2);
+  line-height:1.75;max-width:480px;
+  margin-bottom:36px;
+}
+.hero-stats{
+  display:flex;gap:32px;margin-bottom:40px;
+}
+.stat{border-left:2px solid var(--gold);padding-left:14px;}
+.stat-num{
+  font-family:'Playfair Display',serif;
+  font-size:28px;font-weight:700;color:var(--fg);
+  line-height:1;
+}
+.stat-num span{color:var(--gold);font-size:18px;}
+.stat-label{font-size:11px;color:var(--fg3);text-transform:uppercase;letter-spacing:.1em;margin-top:3px;}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
+.btn-primary{
+  background:var(--gold);color:#000;
+  font-weight:600;font-size:13px;letter-spacing:.06em;
+  padding:13px 28px;border-radius:8px;
+  text-decoration:none;transition:all .2s;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn-primary:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 12px 32px rgba(232,184,75,.3);}
+.btn-secondary{
+  border:1.5px solid var(--border);color:var(--fg2);
+  font-size:13px;font-weight:500;letter-spacing:.06em;
+  padding:13px 28px;border-radius:8px;
+  text-decoration:none;transition:all .2s;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold);}
+
+/* hero right — photo card */
+.hero-right{
+  position:relative;z-index:1;
+  display:flex;justify-content:center;align-items:center;
+}
+.photo-frame{
+  position:relative;width:340px;
+}
+.photo-frame::before{
+  content:'';
+  position:absolute;inset:-2px;
+  background:linear-gradient(135deg,var(--gold),transparent 60%,var(--teal));
+  border-radius:20px;z-index:-1;
+}
+.photo-frame img{
+  width:100%;border-radius:18px;
+  display:block;
+  filter:grayscale(20%) contrast(1.05);
+}
+.photo-badge{
+  position:absolute;bottom:-18px;right:-18px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:12px;padding:14px 18px;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+.photo-badge-top{font-size:10px;color:var(--fg3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;}
+.photo-badge-val{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--gold);}
+.photo-badge-sub{font-size:11px;color:var(--fg2);}
+.floating-cert{
+  position:absolute;top:-16px;left:-20px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:10px;padding:10px 14px;
+  display:flex;align-items:center;gap:10px;
+  box-shadow:0 12px 40px rgba(0,0,0,.4);
+  animation:float 4s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+.cert-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+.cert-text{font-size:11px;color:var(--fg2);line-height:1.3;}
+.cert-text strong{color:var(--fg);font-size:12px;display:block;}
+
+/* ═══════════════════════════════════════════════════════
+   SECTIONS
+═══════════════════════════════════════════════════════ */
+section{padding:100px 48px;position:relative;}
+.section-inner{max-width:1140px;margin:0 auto;}
+.section-label{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:11px;font-weight:600;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--gold);
+  margin-bottom:16px;
+}
+.section-label::after{content:'';width:40px;height:1px;background:var(--gold);}
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(28px,3.5vw,42px);
+  font-weight:700;line-height:1.15;
+  color:var(--fg);margin-bottom:48px;
+}
+.section-title em{font-style:italic;color:var(--gold);}
+
+/* ═══════════════════════════════════════════════════════
+   SKILLS
+═══════════════════════════════════════════════════════ */
+#skills{background:var(--bg2);}
+.skills-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:20px;
+}
+.skill-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:24px;
+  transition:transform .25s var(--ease),border-color .25s,box-shadow .25s;
+  opacity:0;transform:translateY(24px);
+}
+.skill-card.visible{opacity:1;transform:translateY(0);}
+.skill-card:hover{
+  transform:translateY(-4px);
+  border-color:rgba(232,184,75,.3);
+  box-shadow:0 20px 60px rgba(0,0,0,.3);
+}
+.skill-icon{
+  width:42px;height:42px;border-radius:10px;
+  background:rgba(232,184,75,.12);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:14px;font-size:20px;
+}
+.skill-card h3{font-size:14px;font-weight:600;color:var(--fg);margin-bottom:12px;}
+.skill-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.tag{
+  font-size:11px;font-weight:500;
+  padding:4px 10px;border-radius:20px;
+  background:rgba(255,255,255,.06);
+  color:var(--fg2);border:1px solid var(--border);
+  transition:all .18s;
+}
+.tag:hover{background:rgba(232,184,75,.12);color:var(--gold);border-color:rgba(232,184,75,.3);}
+
+/* ═══════════════════════════════════════════════════════
+   EXPERIENCE TIMELINE
+═══════════════════════════════════════════════════════ */
+#experience{background:var(--bg);}
+.timeline{position:relative;padding-left:36px;}
+.timeline::before{
+  content:'';
+  position:absolute;left:7px;top:8px;bottom:8px;
+  width:1px;background:linear-gradient(to bottom,var(--gold),transparent);
+}
+.timeline-item{
+  position:relative;margin-bottom:48px;
+  opacity:0;transform:translateX(-20px);
+  transition:opacity .5s var(--ease),transform .5s var(--ease);
+}
+.timeline-item.visible{opacity:1;transform:translateX(0);}
+.timeline-dot{
+  position:absolute;left:-32px;top:6px;
+  width:14px;height:14px;border-radius:50%;
+  background:var(--bg);border:2px solid var(--gold);
+  transition:background .3s;
+}
+.timeline-item:hover .timeline-dot{background:var(--gold);}
+.timeline-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:28px 30px;
+  transition:border-color .25s,box-shadow .25s;
+}
+.timeline-item:hover .timeline-card{
+  border-color:rgba(232,184,75,.25);
+  box-shadow:0 16px 50px rgba(0,0,0,.25);
+}
+.tl-header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:6px;}
+.tl-role{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--fg);}
+.tl-period{
+  font-size:11px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--gold);
+  background:rgba(232,184,75,.1);
+  padding:4px 12px;border-radius:20px;white-space:nowrap;
+}
+.tl-company{font-size:13px;font-weight:500;color:var(--teal);margin-bottom:14px;}
+.tl-bullets{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.tl-bullets li{
+  font-size:13.5px;color:var(--fg2);line-height:1.6;
+  padding-left:16px;position:relative;
+}
+.tl-bullets li::before{
+  content:'';position:absolute;left:0;top:9px;
+  width:5px;height:5px;border-radius:50%;
+  background:var(--gold);flex-shrink:0;
+}
+.tl-skills-used{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;}
+.tl-tag{
+  font-size:10.5px;padding:3px 9px;border-radius:4px;
+  background:rgba(56,201,176,.08);color:var(--teal);
+  border:1px solid rgba(56,201,176,.15);
+}
+
+/* ═══════════════════════════════════════════════════════
+   CERTIFICATIONS
+═══════════════════════════════════════════════════════ */
+#certifications{background:var(--bg2);}
+.cert-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:16px;
+}
+.cert-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:20px 22px;
+  display:flex;align-items:flex-start;gap:14px;
+  transition:transform .25s,border-color .25s,box-shadow .25s;
+  opacity:0;transform:translateY(20px);
+}
+.cert-card.visible{opacity:1;transform:translateY(0);}
+.cert-card:hover{
+  transform:translateY(-3px);
+  border-color:rgba(232,184,75,.3);
+  box-shadow:0 12px 40px rgba(0,0,0,.3);
+}
+.cert-issuer-badge{
+  width:44px;height:44px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;letter-spacing:.05em;
+  flex-shrink:0;
+}
+.badge-ms{background:rgba(0,120,212,.15);color:#4da6ff;}
+.badge-goo{background:rgba(66,133,244,.12);color:#4fa3f7;}
+.badge-ibm{background:rgba(30,108,195,.12);color:#5ab3f7;}
+.badge-meta{background:rgba(24,119,242,.12);color:#5bb4f8;}
+.badge-int{background:rgba(42,175,70,.12);color:#52cc6f;}
+.cert-body{}
+.cert-name{font-size:13px;font-weight:600;color:var(--fg);line-height:1.35;margin-bottom:4px;}
+.cert-via{font-size:11px;color:var(--fg3);}
+.cert-verify{
+  font-size:10px;color:var(--gold);text-decoration:none;
+  display:inline-flex;align-items:center;gap:4px;margin-top:6px;
+  transition:opacity .2s;
+}
+.cert-verify:hover{opacity:.7;}
+
+/* ═══════════════════════════════════════════════════════
+   PORTFOLIO
+═══════════════════════════════════════════════════════ */
+#portfolio{background:var(--bg);}
+.portfolio-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:20px;
+}
+.portfolio-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);overflow:hidden;
+  transition:transform .25s,box-shadow .25s,border-color .25s;
+  opacity:0;transform:translateY(24px);
+}
+.portfolio-card.visible{opacity:1;transform:translateY(0);}
+.portfolio-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 24px 64px rgba(0,0,0,.4);
+  border-color:rgba(232,184,75,.25);
+}
+.portfolio-thumb{
+  width:100%;height:160px;
+  background:linear-gradient(135deg,var(--bg3),var(--surface));
+  display:flex;align-items:center;justify-content:center;
+  font-size:36px;position:relative;overflow:hidden;
+}
+.portfolio-thumb::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom,transparent 40%,rgba(14,15,19,.8));
+}
+.portfolio-body{padding:18px 20px 20px;}
+.portfolio-cat{
+  font-size:10px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--teal);margin-bottom:6px;
+}
+.portfolio-title{font-size:15px;font-weight:600;color:var(--fg);margin-bottom:8px;line-height:1.35;}
+.portfolio-desc{font-size:12.5px;color:var(--fg2);line-height:1.6;margin-bottom:14px;}
+.portfolio-link{
+  font-size:12px;font-weight:600;color:var(--gold);
+  text-decoration:none;display:inline-flex;align-items:center;gap:5px;
+  transition:gap .2s;
+}
+.portfolio-link:hover{gap:9px;}
+
+/* ═══════════════════════════════════════════════════════
+   REVIEWS
+═══════════════════════════════════════════════════════ */
+#reviews{background:var(--bg2);}
+.reviews-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:18px;
+}
+.review-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:24px 26px;
+  position:relative;
+  transition:transform .25s,border-color .25s;
+  opacity:0;transform:translateY(20px);
+}
+.review-card.visible{opacity:1;transform:translateY(0);}
+.review-card:hover{transform:translateY(-3px);border-color:rgba(232,184,75,.2);}
+.review-stars{color:var(--gold);font-size:13px;letter-spacing:2px;margin-bottom:12px;}
+.review-text{
+  font-size:13.5px;color:var(--fg2);line-height:1.7;
+  font-style:italic;margin-bottom:16px;
+}
+.review-text::before{content:'\201C';font-family:'Playfair Display',serif;font-size:40px;color:rgba(232,184,75,.2);line-height:0;vertical-align:-14px;margin-right:4px;}
+.review-author{font-size:12.5px;font-weight:600;color:var(--fg);}
+.review-company{font-size:11.5px;color:var(--fg3);}
+.review-project{
+  font-size:10.5px;color:var(--gold);
+  margin-top:4px;font-weight:500;letter-spacing:.04em;
+}
+
+/* ═══════════════════════════════════════════════════════
+   EDUCATION
+═══════════════════════════════════════════════════════ */
+#education{background:var(--bg);}
+.edu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;}
+.edu-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:24px;
+  display:flex;gap:16px;align-items:flex-start;
+  transition:border-color .25s,transform .25s;
+  opacity:0;transform:translateY(16px);
+}
+.edu-card.visible{opacity:1;transform:translateY(0);}
+.edu-card:hover{border-color:rgba(232,184,75,.25);transform:translateY(-2px);}
+.edu-icon{
+  width:44px;height:44px;border-radius:10px;
+  background:rgba(232,184,75,.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;flex-shrink:0;
+}
+.edu-degree{font-size:14px;font-weight:600;color:var(--fg);margin-bottom:4px;}
+.edu-inst{font-size:12.5px;color:var(--fg2);margin-bottom:6px;}
+.edu-year{
+  font-size:11px;font-weight:600;letter-spacing:.08em;
+  color:var(--gold);background:rgba(232,184,75,.1);
+  padding:2px 10px;border-radius:20px;display:inline-block;
+}
+
+/* ═══════════════════════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════════════════════ */
+#contact{
+  background:var(--bg2);
+  text-align:center;
+}
+.contact-inner{max-width:640px;margin:0 auto;}
+.contact-inner .section-label{justify-content:center;}
+.contact-intro{font-size:15px;color:var(--fg2);line-height:1.7;margin-bottom:40px;}
+.contact-links{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-bottom:48px;}
+.contact-link{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:12px 22px;border-radius:10px;
+  border:1.5px solid var(--border);
+  color:var(--fg2);text-decoration:none;font-size:13px;font-weight:500;
+  transition:all .2s;
+}
+.contact-link:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px);}
+.contact-link svg{flex-shrink:0;}
+.contact-cta-text{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(22px,3vw,34px);font-weight:700;
+  color:var(--fg);margin-bottom:24px;line-height:1.2;
+}
+.contact-cta-text em{font-style:italic;color:var(--gold);}
+
+/* ═══════════════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════════════ */
+footer{
+  background:var(--bg);
+  border-top:1px solid var(--border);
+  padding:24px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;
+}
+.footer-copy{font-size:12px;color:var(--fg3);}
+.footer-copy span{color:var(--gold);}
+.back-top{
+  font-size:12px;font-weight:500;color:var(--fg3);
+  text-decoration:none;display:flex;align-items:center;gap:6px;
+  transition:color .2s;
+}
+.back-top:hover{color:var(--gold);}
+
+/* ═══════════════════════════════════════════════════════
+   ANIMATIONS / REVEAL
+═══════════════════════════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s var(--ease),transform .6s var(--ease);}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* ═══════════════════════════════════════════════════════
+   SCROLLBAR
+═══════════════════════════════════════════════════════ */
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--surface);border-radius:3px;}
+::-webkit-scrollbar-thumb:hover{background:var(--gold);}
+
+/* ═══════════════════════════════════════════════════════
+   MOBILE
+═══════════════════════════════════════════════════════ */
+@media(max-width:900px){
+  nav{padding:16px 24px;}
+  .nav-links{display:none;}
+  .hero{grid-template-columns:1fr;padding:100px 24px 60px;text-align:center;}
+  .hero-right{display:none;}
+  .hero-stats{justify-content:center;}
+  .hero-btns{justify-content:center;}
+  section{padding:70px 24px;}
+  footer{padding:20px 24px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">Badar <span>Ghalib</span></div>
+  <div class="nav-links">
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a class="nav-cta" href="mailto:ngbiexpert1@gmail.com">Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg-glow"></div>
+  <div class="hero-bg-glow2"></div>
+  <div class="hero-left">
+    <div class="hero-eyebrow">Available for Remote Roles</div>
+    <h1 class="hero-name">Badar<em>Ghalib</em></h1>
+    <p class="hero-title">Senior BI Developer &amp; Data Engineer &nbsp;·&nbsp; <strong>Finance Domain Expert</strong></p>
+    <p class="hero-desc">I bridge the gap between raw data and real decisions. With 15+ years in finance and 5,500+ hours of BI delivery, I build Power BI dashboards, AI-enhanced platforms, and data pipelines that move businesses from reactive reporting to proactive intelligence.</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">5,539<span>+</span></div>
+        <div class="stat-label">Hours Delivered</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">121<span>+</span></div>
+        <div class="stat-label">Projects Completed</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">$50K<span>+</span></div>
+        <div class="stat-label">Total Earned</div>
+      </div>
+    </div>
+    <div class="hero-btns">
+      <a class="btn-primary" href="https://www.upwork.com/freelancers/~015839939104464ef0" target="_blank">
+        View Full Portfolio
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+      <a class="btn-secondary" href="mailto:ngbiexpert1@gmail.com">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        Get In Touch
+      </a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="photo-frame">
+      <div class="floating-cert">
+        <div class="cert-dot"></div>
+        <div class="cert-text"><strong>Microsoft Certified</strong>Power BI Data Analyst</div>
+      </div>
+      <img src="Badarlatest.jpg" alt="Badar Ghalib" onerror="this.style.display='none'"/>
+      <div class="photo-badge">
+        <div class="photo-badge-top">Total Earned</div>
+        <div class="photo-badge-val">$50K+</div>
+        <div class="photo-badge-sub">Upwork · Top Rated · 5,539 hrs</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-label reveal">Core Skills</div>
+    <h2 class="section-title reveal">Technical <em>Expertise</em></h2>
+    <div class="skills-grid">
+
+      <div class="skill-card">
+        <div class="skill-icon">📊</div>
+        <h3>Business Intelligence & Visualization</h3>
+        <div class="skill-tags">
+          <span class="tag">Microsoft Power BI</span><span class="tag">Advanced DAX</span>
+          <span class="tag">Looker Studio</span><span class="tag">Tableau</span>
+          <span class="tag">Power Query (M)</span><span class="tag">Data Modeling</span>
+          <span class="tag">KPI Reporting</span><span class="tag">Row-Level Security</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">⚙️</div>
+        <h3>Data Engineering & ETL</h3>
+        <div class="skill-tags">
+          <span class="tag">ETL/ELT Pipelines</span><span class="tag">API Integrations</span>
+          <span class="tag">Data Transformation</span><span class="tag">Workflow Automation</span>
+          <span class="tag">Incremental Loading</span><span class="tag">JSON/XML Processing</span>
+          <span class="tag">Data Cleansing</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🗄️</div>
+        <h3>Databases & Cloud</h3>
+        <div class="skill-tags">
+          <span class="tag">Google BigQuery</span><span class="tag">MySQL</span>
+          <span class="tag">SQL Development</span><span class="tag">Data Warehousing</span>
+          <span class="tag">Microsoft Azure</span><span class="tag">Microsoft Fabric</span>
+          <span class="tag">Google Cloud Platform</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🤖</div>
+        <h3>AI & Advanced Analytics</h3>
+        <div class="skill-tags">
+          <span class="tag">Generative AI</span><span class="tag">Agentic AI Systems</span>
+          <span class="tag">RAG Architecture</span><span class="tag">Predictive Modeling</span>
+          <span class="tag">Machine Learning</span><span class="tag">IBM Watsonx</span>
+          <span class="tag">Python Automation</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">💹</div>
+        <h3>Finance & Domain Expertise</h3>
+        <div class="skill-tags">
+          <span class="tag">Financial Modeling</span><span class="tag">FP&A</span>
+          <span class="tag">3-Statement Projections</span><span class="tag">ERP Analytics</span>
+          <span class="tag">Bookkeeping</span><span class="tag">QuickBooks</span>
+          <span class="tag">Business Plans</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🛒</div>
+        <h3>Industry Analytics</h3>
+        <div class="skill-tags">
+          <span class="tag">E-Commerce Analytics</span><span class="tag">Shopify / Amazon</span>
+          <span class="tag">Marketing Analytics</span><span class="tag">GA4 / BigQuery</span>
+          <span class="tag">Google & Meta Ads</span><span class="tag">CRM Reporting</span>
+          <span class="tag">Sales Forecasting</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-label reveal">Career Journey</div>
+    <h2 class="section-title reveal">Professional <em>Experience</em></h2>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="tl-header">
+            <div class="tl-role">Lead BI Trainer</div>
+            <div class="tl-period">Apr 2026 – Present</div>
+          </div>
+          <div class="tl-company">NG Business Intelligence Training Institute · Remote</div>
+          <ul class="tl-bullets">
+            <li>Designed and launched comprehensive Power BI, SQL, and Data Analytics training programs for aspiring BI professionals</li>
+            <li>Created hands-on curriculum covering DAX, data modeling, ETL, and dashboard design using the proprietary NG BI Platform as a live teaching environment</li>
+            <li>Mentored students through portfolio-grade projects and BI certification preparation</li>
+          </ul>
+          <div class="tl-skills-used">
+            <span class="tl-tag">Power BI</span><span class="tl-tag">DAX</span><span class="tl-tag">SQL</span><span class="tl-tag">ETL</span><span class="tl-tag">Curriculum Design</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="tl-header">
+            <div class="tl-role">Senior Power BI Developer & Data Engineer</div>
+            <div class="tl-period">Nov 2022 – Apr 2026</div>
+          </div>
+          <div class="tl-company">Independent Freelance — Top-Rated · Upwork · Remote</div>
+          <ul class="tl-bullets">
+            <li>Delivered 120+ BI, data engineering, and AI-enhanced platform projects across 10+ industries for clients in USA, UK, Canada, Australia, and Europe — maintaining a consistent 5-star rating throughout.</li>
+            <li>Built end-to-end Power BI reporting system for TruHeight Vitamins (USA) consolidating Shopify, Amazon, and Walmart data — cutting weekly reporting time from days to hours</li>
+            <li>Developed financial performance dashboards for US CPA firms covering P&L, cash flow, and KPI tracking</li>
+            <li>Designed and deployed the NG Information BI Platform — an integrated AI-enhanced business operating system combining CRM, financial forecasting, dashboards, and agentic AI</li>
+          </ul>
+          <div class="tl-skills-used">
+            <span class="tl-tag">Power BI</span><span class="tl-tag">Looker Studio</span><span class="tl-tag">SQL</span><span class="tl-tag">Python</span><span class="tl-tag">ETL Pipelines</span><span class="tl-tag">BigQuery</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="tl-header">
+            <div class="tl-role">Business Intelligence Analyst</div>
+            <div class="tl-period">Jan 2023 – Apr 2023</div>
+          </div>
+          <div class="tl-company">Gorilla Commerce · USA · Remote</div>
+          <ul class="tl-bullets">
+            <li>Built finance dashboards for sales, gross margin, and inventory performance — enabling faster weekly business reviews</li>
+            <li>Automated recurring reporting and refresh logic, reducing manual effort by 60%</li>
+            <li>Identified cost-optimization opportunities through variance deep-dives and SKU/channel profitability analysis</li>
+          </ul>
+          <div class="tl-skills-used">
+            <span class="tl-tag">Power BI</span><span class="tl-tag">Finance Analytics</span><span class="tl-tag">DAX</span><span class="tl-tag">Data Modeling</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="tl-header">
+            <div class="tl-role">Business & Financial Planning Consultant</div>
+            <div class="tl-period">Dec 2021 – Oct 2022</div>
+          </div>
+          <div class="tl-company">Lexen Law · UK · Remote</div>
+          <ul class="tl-bullets">
+            <li>Built investor-ready business plans with integrated 3-statement projections, unit economics, and funding assumptions</li>
+            <li>Developed capital-planning models to evaluate ROI, payback, and risk scenarios for growth initiatives</li>
+          </ul>
+          <div class="tl-skills-used">
+            <span class="tl-tag">Financial Modeling</span><span class="tl-tag">Business Plans</span><span class="tl-tag">FP&A</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="tl-header">
+            <div class="tl-role">Financial Data Analyst</div>
+            <div class="tl-period">Jan 2017 – Dec 2021</div>
+          </div>
+          <div class="tl-company">Independent Freelance · Remote</div>
+          <ul class="tl-bullets">
+            <li>Analyzed, modeled, and visualized complex financial datasets for international clients across bookkeeping, budgeting, and strategic planning</li>
+            <li>Developed ETL processes integrating data from multiple financial systems, reducing manual reporting time significantly</li>
+          </ul>
+          <div class="tl-skills-used">
+            <span class="tl-tag">Financial Analysis</span><span class="tl-tag">Power BI</span><span class="tl-tag">SQL</span><span class="tl-tag">ETL</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="tl-header">
+            <div class="tl-role">Accounts & Admin Incharge</div>
+            <div class="tl-period">May 2007 – Nov 2011</div>
+          </div>
+          <div class="tl-company">Habib Metropolitan Bank · Lahore, Pakistan</div>
+          <ul class="tl-bullets">
+            <li>Managed branch-level accounting operations, reconciliations, and financial reporting under strict internal control guidelines</li>
+            <li>Supported audits and compliance reviews, ensuring accurate general ledger integrity and month-end close</li>
+          </ul>
+          <div class="tl-skills-used">
+            <span class="tl-tag">Accounting</span><span class="tl-tag">Financial Reporting</span><span class="tl-tag">Compliance</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-inner">
+    <div class="section-label reveal">Credentials</div>
+    <h2 class="section-title reveal">Certifications &amp; <em>Qualifications</em></h2>
+    <div class="cert-grid">
+
+      <div class="cert-card">
+        <div class="cert-issuer-badge badge-ms">MS</div>
+        <div class="cert-body">
+          <div class="cert-name">Power BI Data Analyst Professional Certificate</div>
+          <div class="cert-via">Microsoft via Coursera</div>
+          <a class="cert-verify" href="https://www.coursera.org/account/accomplishments/professional-cert/6KHCR6EPXVVN" target="_blank">Verify ↗</a>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-issuer-badge badge-ms">MS</div>
+        <div class="cert-body">
+          <div class="cert-name">Python Developer Professional Certificate</div>
+          <div class="cert-via">Microsoft via Coursera</div>
+          <a class="cert-verify" href="https://www.coursera.org/account/accomplishments/professional-cert/SQ38AMAL5GFV" target="_blank">Verify ↗</a>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-issuer-badge badge-ibm">IBM</div>
+        <div class="cert-body">
+          <div class="cert-name">Data Engineering Professional Certificate</div>
+          <div class="cert-via">IBM via Coursera</div>
+          <a class="cert-verify" href="https://www.coursera.org/account/accomplishments/professional-cert/XYVX3GW7XYNB" target="_blank">Verify ↗</a>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-issuer-badge badge-ibm">IBM</div>
+        <div class="cert-body">
+          <div class="cert-name">Data Warehouse Engineer Professional Certificate</div>
+          <div class="cert-via">IBM via Coursera</div>
+          <a class="cert-verify" href="https://www.coursera.org/account/accomplishments/professional-cert/ZV151PNDW3W2" target="_blank">Verify ↗</a>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-issuer-badge badge-ibm">IBM</div>
+        <div class="cert-body">
+          <div class="cert-name">AI Developer Professional Certificate</div>
+          <div class="cert-via">IBM via Coursera</div>
+          <a class="cert-verify" href="https://www.coursera.org/account/accomplishments/professional-cert/UAWB32MPZEZX" target="_blank">Verify ↗</a>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-issuer-badge badge-ibm">IBM</div>
+        <div class="cert-body">
+          <div class="cert-name">Generative AI for Data Engineers Specialization</div>
+          <div class="cert-via">IBM via Coursera</div>
+          <a class="cert-verify" href="https://www.coursera.org/account/accomplishments/specialization/A7R30MNF1T22" target="_blank">Verify ↗</a>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-issuer-badge badge-goo">G</div>
+        <div class="cert-body">
+          <div class="cert-name">Business Intelligence Professional Certificate</div>
+          <div class="cert-via">Google via Coursera</div>
+          <a class="cert-verify" href="https://www.coursera.org/account/accomplishments/professional-cert/B72VFY8BQ8PQ" target="_blank">Verify ↗</a>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-issuer-badge badge-goo">G</div>
+        <div class="cert-body">
+          <div class="cert-name">Advanced Data Analytics Professional Certificate</div>
+          <div class="cert-via">Google via Coursera</div>
+          <a class="cert-verify" href="https://www.coursera.org/account/accomplishments/professional-cert/2VYB7YRQSMLZ" target="_blank">Verify ↗</a>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-issuer-badge badge-goo">G</div>
+        <div class="cert-body">
+          <div class="cert-name">Cloud Database Engineer Specialization</div>
+          <div class="cert-via">Google Cloud via Coursera</div>
+          <a class="cert-verify" href="https://www.coursera.org/account/accomplishments/specialization/0CT0592AA03E" target="_blank">Verify ↗</a>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-issuer-badge badge-meta">M</div>
+        <div class="cert-body">
+          <div class="cert-name">Database Engineer Professional Certificate</div>
+          <div class="cert-via">Meta via Coursera</div>
+          <a class="cert-verify" href="https://www.coursera.org/account/accomplishments/professional-cert/WGV99JZONG0T" target="_blank">Verify ↗</a>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-issuer-badge badge-int">IQ</div>
+        <div class="cert-body">
+          <div class="cert-name">Bookkeeping Professional Certificate</div>
+          <div class="cert-via">Intuit via Coursera</div>
+          <a class="cert-verify" href="https://www.coursera.org/account/accomplishments/professional-cert/E5FS3MRWFLWF" target="_blank">Verify ↗</a>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-issuer-badge badge-goo">G</div>
+        <div class="cert-body">
+          <div class="cert-name">Project Management Professional Certificate</div>
+          <div class="cert-via">Google via Coursera · Agile / Scrum</div>
+          <a class="cert-verify" href="https://www.coursera.org/account/accomplishments/professional-cert/WFDJSYEKLMNW" target="_blank">Verify ↗</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="section-inner">
+    <div class="section-label reveal">Live Work</div>
+    <h2 class="section-title reveal">Portfolio <em>Highlights</em></h2>
+    <div class="portfolio-grid">
+
+      <div class="portfolio-card">
+        <div class="portfolio-thumb">📊</div>
+        <div class="portfolio-body">
+          <div class="portfolio-cat">Power BI · Finance</div>
+          <div class="portfolio-title">End-to-End Financial Performance Dashboard</div>
+          <div class="portfolio-desc">Advanced Power BI financial modeling covering P&L, Balance Sheet, Cash Flow, and executive KPIs. Live embedded report.</div>
+          <a class="portfolio-link" href="https://app.powerbi.com/view?r=eyJrIjoiNmRhMzFjYzktNDhhZC00N2ZiLTllNjItOTY1MDY2ZDllY2NhIiwidCI6IjkwODcxMGU5LTA4YzItNDlkNS04MDI0LWUwOWQwNTMxYTg4ZCIsImMiOjl9" target="_blank">View Live Report →</a>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="portfolio-thumb">🛒</div>
+        <div class="portfolio-body">
+          <div class="portfolio-cat">Power BI · E-Commerce</div>
+          <div class="portfolio-title">Amazon E-Commerce Intelligence Dashboard</div>
+          <div class="portfolio-desc">Product insights, cost analysis, and customer intelligence consolidating Amazon seller data into actionable Power BI views.</div>
+          <a class="portfolio-link" href="https://app.powerbi.com/view?r=eyJrIjoiZmFiM2RlZWMtZmJlOS00MWY3LWI4MjctMTU5ZjRkNjYyNDZkIiwidCI6IjkwODcxMGU5LTA4YzItNDlkNS04MDI0LWUwOWQwNTMxYTg4ZCIsImMiOjl9" target="_blank">View Live Report →</a>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="portfolio-thumb">🚢</div>
+        <div class="portfolio-body">
+          <div class="portfolio-cat">Power BI · Logistics</div>
+          <div class="portfolio-title">Shipment Pricing Dashboard</div>
+          <div class="portfolio-desc">Rate analysis, cost optimization, and pricing intelligence. Helps logistics teams make faster, data-driven pricing decisions.</div>
+          <a class="portfolio-link" href="https://app.powerbi.com/view?r=eyJrIjoiYTU3ZTllODktZmZlMi00NWVhLWFiNGUtMzNhYmZmYmZlM2VhIiwidCI6IjkwODcxMGU5LTA4YzItNDlkNS04MDI0LWUwOWQwNTMxYTg4ZCIsImMiOjl9" target="_blank">View Live Report →</a>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="portfolio-thumb">📱</div>
+        <div class="portfolio-body">
+          <div class="portfolio-cat">Power BI · Marketing</div>
+          <div class="portfolio-title">YouTube Analytics Dashboard</div>
+          <div class="portfolio-desc">Channel performance, engagement metrics, content trends, and growth forecasting for content-driven businesses.</div>
+          <a class="portfolio-link" href="https://app.powerbi.com/view?r=eyJrIjoiYWE1ZWViZjMtMmZhMi00OWFmLTg5NTUtOTlhN2RiYjQ0ZGQ0IiwidCI6IjkwODcxMGU5LTA4YzItNDlkNS04MDI0LWUwOWQwNTMxYTg4ZCIsImMiOjl9" target="_blank">View Live Report →</a>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="portfolio-thumb">🏏</div>
+        <div class="portfolio-body">
+          <div class="portfolio-cat">Power BI · Sports Analytics</div>
+          <div class="portfolio-title">Cricket Analytics Dashboard</div>
+          <div class="portfolio-desc">Cross-format global cricket analytics covering international tournaments, regions, and player performance — web embedded.</div>
+          <a class="portfolio-link" href="https://app.powerbi.com/view?r=eyJrIjoiYWZmNmIyMGUtNGQwOC00MmZjLTg4OWYtNTNhMGM3YmIxMjg2IiwidCI6IjkwODcxMGU5LTA4YzItNDlkNS04MDI0LWUwOWQwNTMxYTg4ZCIsImMiOjl9" target="_blank">View Live Report →</a>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="portfolio-thumb">🔍</div>
+        <div class="portfolio-body">
+          <div class="portfolio-cat">Looker Studio · Marketing</div>
+          <div class="portfolio-title">GA4 + Google Ads Looker Dashboard</div>
+          <div class="portfolio-desc">Advanced Looker Studio integrating Google Analytics 4, Google Ads, and BigQuery for comprehensive marketing intelligence.</div>
+          <a class="portfolio-link" href="https://datastudio.google.com/embed/reporting/a6101807-aed5-4372-8185-bd8d11a18de5/page/kIV1C" target="_blank">View Live Report →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="section-inner">
+    <div class="section-label reveal">Social Proof</div>
+    <h2 class="section-title reveal">Client <em>Reviews</em></h2>
+    <div class="reviews-grid">
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">Excellent communicator. Made sure he understood exactly what we needed before starting. We will definitely use Badar again as we expand our workbooks.</div>
+        <div class="review-author">Craig Cody</div>
+        <div class="review-company">ccodycpa.com · 🇺🇸 USA</div>
+        <div class="review-project">Power BI Dashboard</div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">Badar was a pleasure to work with. He was very responsive, polite, and knowledgeable — honest, and worked very efficiently. I appreciated his patience throughout.</div>
+        <div class="review-author">Market Bold</div>
+        <div class="review-company">MBold · 🇺🇸 USA</div>
+        <div class="review-project">Business Intelligence Reporting</div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">Great work by a skilled report developer. Would recommend 10/10.</div>
+        <div class="review-author">Cedric Degruyter</div>
+        <div class="review-company">Casiola · 🇺🇸 USA</div>
+        <div class="review-project">BI Reporting</div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">Badar was a pleasure to work with, will definitely be hiring him again.</div>
+        <div class="review-author">Aaron Berman</div>
+        <div class="review-company">TruHeight Vitamins · 🇺🇸 USA</div>
+        <div class="review-project">Data Dashboard (Shopify, Amazon, Walmart)</div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">Badar is quite diligent and knowledgeable. He delivers exactly what he says and his work is excellent. I hope to work with him again.</div>
+        <div class="review-author">Carrey Sandera</div>
+        <div class="review-company">🇸🇪 Sweden</div>
+        <div class="review-project">Financial Forecasting & Projections</div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">He was awesome to work with and saved me a ton of work. Very precise and responsive.</div>
+        <div class="review-author">Matthew Santi</div>
+        <div class="review-company">IQ SELF LLC · 🇺🇸 USA</div>
+        <div class="review-project">House-Flip Bookkeeping</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-inner">
+    <div class="section-label reveal">Academic Background</div>
+    <h2 class="section-title reveal">Education &amp; <em>Qualifications</em></h2>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-icon">🏛️</div>
+        <div>
+          <div class="edu-degree">ACMA Candidate</div>
+          <div class="edu-inst">Institute of Cost and Management Accountants of Pakistan (ICMAP)</div>
+          <span class="edu-year">2021 – 2022</span>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-icon">🎓</div>
+        <div>
+          <div class="edu-degree">Master of Commerce (M.Com)</div>
+          <div class="edu-inst">University of Sargodha</div>
+          <span class="edu-year">2010 – 2012</span>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-icon">📚</div>
+        <div>
+          <div class="edu-degree">Bachelor of Commerce (B.Com)</div>
+          <div class="edu-inst">University of the Punjab</div>
+          <span class="edu-year">2003 – 2005</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-inner">
+      <div class="section-label reveal">Let's Connect</div>
+      <p class="contact-cta-text reveal">Ready to turn your data into <em>decisions?</em></p>
+      <p class="contact-intro reveal">Available for remote full-time roles, senior freelance contracts, and consulting engagements. Based in Lahore, Pakistan — working with clients across USA, UK, Canada, Europe and the Middle East.</p>
+      <div class="contact-links reveal">
+        
+        <a class="contact-link" href="https://www.credly.com/users/badar-ghalib" target="_blank">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+          Credly Badges
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-copy">© 2026 <span>Badar Ghalib</span> · Senior BI Developer & Data Engineer · Lahore, Pakistan</div>
+  <a class="back-top" href="#home">
+    Back to top
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+  </a>
+</footer>
+
+<script>
+// ── Nav scroll state ──────────────────────────────────────────────────────────
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// ── Intersection Observer — reveal on scroll ─────────────────────────────────
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      // stagger children of grid containers
+      const cards = e.target.querySelectorAll('.skill-card, .cert-card, .portfolio-card, .review-card, .edu-card');
+      cards.forEach((c, i) => {
+        setTimeout(() => c.classList.add('visible'), i * 80);
+      });
+      const tlItems = e.target.querySelectorAll('.timeline-item');
+      tlItems.forEach((c, i) => {
+        setTimeout(() => c.classList.add('visible'), i * 120);
+      });
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.reveal, .skills-grid, .cert-grid, .portfolio-grid, .reviews-grid, .edu-grid, .timeline').forEach(el => io.observe(el));
+
+// ── Hero stats count-up ────────────────────────────────────────────────────────
+function countUp(el, target, duration=1800) {
+  const start = performance.now();
+  const update = (now) => {
+    const t = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - t, 3);
+    el.textContent = Math.round(eased * target).toLocaleString();
+    if (t < 1) requestAnimationFrame(update);
+    else el.textContent = target.toLocaleString();
+  };
+  requestAnimationFrame(update);
+}
+
+const statNums = document.querySelectorAll('.stat-num');
+const statsEl = document.querySelector('.hero-stats');
+let counted = false;
+const statsObs = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting && !counted) {
+    counted = true;
+    const targets = [5539, 121, 50];
+    const displays = ['5,539', '121', '$50K'];
+    statNums.forEach((el, i) => {
+      const span = el.querySelector('span');
+      setTimeout(() => {
+        // swap text directly after animation
+        const base = el.firstChild;
+        if(base && base.nodeType === 3) base.textContent = displays[i];
+        if(span) span.textContent = '+';
+      }, 1900);
+    });
+  }
+}, { threshold: 0.5 });
+if (statsEl) statsObs.observe(statsEl);
+
+// ── Smooth active nav link highlight ──────────────────────────────────────────
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 100) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + current ? 'var(--gold)' : '';
+  });
+}, { passive: true });
+</script>
+</body>
+</html>
